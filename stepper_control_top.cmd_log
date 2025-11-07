@@ -1,0 +1,145 @@
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 
+xst -intstyle ise -ifn "/home/ise/digital/rxUart/stepper_control_top.xst" -ofn "/home/ise/digital/rxUart/stepper_control_top.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc main.ucf -p xc6slx9-tqg144-3 stepper_control_top.ngc stepper_control_top.ngd  
+map -intstyle ise -p xc6slx9-tqg144-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o stepper_control_top_map.ncd stepper_control_top.ngd stepper_control_top.pcf 
+par -w -intstyle ise -ol high -mt off stepper_control_top_map.ncd stepper_control_top.ncd stepper_control_top.pcf 
+trce -intstyle ise -v 3 -s 3 -n 3 -fastpaths -xml stepper_control_top.twx stepper_control_top.ncd -o stepper_control_top.twr stepper_control_top.pcf -ucf main.ucf 
+bitgen -intstyle ise -f stepper_control_top.ut stepper_control_top.ncd 

@@ -1,0 +1,502 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity stepper_control_top is
+    port (
+        -- System
+        i_clk   : in  std_logic; -- 20 MHz Clock
+        i_rst   : in  std_logic; -- PB1 (P45)
+        
+        -- UART
+        i_rxd   : in  std_logic; -- RXD (P23)
+        o_txd   : out std_logic; -- TXD (NEW)
+        
+        -- Inputs
+        i_display_btn : in  std_logic; -- PB3 (P47)
+        i_stepper_driver_enable : in std_logic; -- SW0 (P66)
+        
+        -- 7-Segment Display
+        o_seg_anodes   : out std_logic_vector(1 downto 0);
+        o_seg_cathodes : out std_logic_vector(6 downto 0);
+        
+        -- Motor Outputs
+        o_stepper_enable : out std_logic; -- P24
+        o_stepper_x_dir  : out std_logic; -- P22
+        o_stepper_x_step : out std_logic; -- P17
+        o_stepper_y_dir  : out std_logic; -- P12
+        o_stepper_y_step : out std_logic; -- P10
+        o_servo_pwm    : out std_logic; -- P15
+        
+        -- Debug LEDs
+        o_heartbeat_led : out std_logic; -- L0 (P82)
+        o_rx_activity_led : out std_logic; -- L2 (P80)
+        o_busy_led : out std_logic      -- L3 (P79)
+    );
+end entity stepper_control_top;
+
+architecture rtl of stepper_control_top is
+
+    --==================================================================
+    -- UART PACKET PARSER SIGNALS
+    --==================================================================
+    signal w_x_steps_uart    : std_logic_vector(23 downto 0);
+    signal w_y_steps_uart    : std_logic_vector(23 downto 0);
+    signal w_control_uart    : std_logic_vector(7 downto 0);
+    signal w_new_command   : std_logic;
+    
+    --==================================================================
+    -- 7-SEGMENT DISPLAY SIGNALS
+    --==================================================================
+    signal r_x_data_display  : std_logic_vector(23 downto 0) := (others => '0');
+    signal r_y_data_display  : std_logic_vector(23 downto 0) := (others => '0');
+    signal r_control_display : std_logic_vector(7 downto 0)  := (others => '0');
+    signal r_btn_sync        : std_logic_vector(1 downto 0);
+    signal r_display_index   : integer range 0 to 6 := 0;
+    signal w_byte_to_show    : std_logic_vector(7 downto 0);
+    
+    --==================================================================
+    -- STEPPER MOTOR SIGNALS
+    --==================================================================
+    
+    -- 500 Hz Stepper Pulse Generator
+    -- 20,000,000 / (500 Hz * 2) = 20,000.
+    constant C_STEP_HALF_PERIOD : natural := 19999;
+    signal r_stepper_x_counter : natural range 0 to C_STEP_HALF_PERIOD := 0;
+    signal r_stepper_y_counter : natural range 0 to C_STEP_HALF_PERIOD := 0;
+    signal w_stepper_x_pulse : std_logic := '0';
+    signal w_stepper_y_pulse : std_logic := '0';
+    -- Step Counters (to track remaining steps)
+    signal r_x_steps_remaining : unsigned(23 downto 0) := (others => '0');
+    signal r_y_steps_remaining : unsigned(23 downto 0) := (others => '0');
+    -- State Machines
+    type t_stepper_state is (s_idle, s_stepping);
+    signal r_x_stepper_state : t_stepper_state := s_idle;
+    signal r_y_stepper_state : t_stepper_state := s_idle;
+    
+    --==================================================================
+    -- SERVO MOTOR SIGNALS (Logic from your example, constants for 20MHz)
+    --==================================================================
+    
+    -- 1. Clock Frequency: 20,000,000 Hz
+    constant C_CLK_FREQ_HZ : integer := 20_000_000;
+    -- 2. Period (20ms): (20,000,000 / 1000) * 20 = 400,000 cycles
+    constant C_SERVO_PERIOD_CYCLES : integer := (C_CLK_FREQ_HZ / 1000) * 20;
+    -- 3. Min Pulse (1.0ms for 0 deg): 20,000,000 / 1000 = 20,000 cycles
+    constant C_SERVO_MIN_PULSE_CYCLES : integer := C_CLK_FREQ_HZ / 1000;
+    -- 4. 90-deg Pulse (1.5ms): (20,000,000 / 1000) * 1.5 = 30,000 cycles
+    constant C_SERVO_90DEG_PULSE_CYCLES : integer := (C_CLK_FREQ_HZ * 3) / 2000;
+    -- 30,000
+    
+    -- Signals for Servo Logic
+    signal r_servo_period_counter : integer range 0 to C_SERVO_PERIOD_CYCLES - 1 := 0;
+    signal w_servo_target_width   : integer range C_SERVO_MIN_PULSE_CYCLES to C_SERVO_90DEG_PULSE_CYCLES;
+    signal w_servo_position_select : std_logic;
+    --==================================================================
+    -- DEBUG LED SIGNALS
+    --==================================================================
+    signal r_heartbeat_counter : unsigned(23 downto 0) := (others => '0');
+    signal w_rx_activity_from_parser : std_logic;
+    signal r_busy_led : std_logic := '0';
+
+    --==================================================================
+    -- *** NEW: UART TX STATUS SIGNALS ***
+    --==================================================================
+    signal w_motor_busy      : std_logic; -- '1' if X or Y is moving
+    signal r_motor_busy_sync : std_logic_vector(1 downto 0); -- For edge detection
+    signal w_tx_data         : std_logic_vector(7 downto 0);
+    signal w_tx_start        : std_logic := '0';
+    signal w_tx_busy         : std_logic;
+    
+    type t_tx_state is (s_tx_idle, s_tx_trigger, s_tx_wait);
+    signal r_tx_state : t_tx_state := s_tx_idle;
+
+    --==================================================================
+    -- COMPONENT DECLARATIONS
+    --==================================================================
+    
+    component packet_parser is
+        generic ( g_CLKS_PER_BIT : integer := 2083 );
+        port (
+            i_clk   : in  std_logic;
+            i_rst   : in  std_logic;
+            i_rxd   : in  std_logic;
+            o_x_steps : out std_logic_vector(23 downto 0);
+            o_y_steps : out std_logic_vector(23 downto 0);
+            o_control : out std_logic_vector(7 downto 0);
+            o_new_command_valid : out std_logic;
+            o_rx_activity_led : out std_logic -- Added for L2
+        );
+    end component;
+    
+    component display_multiplexer is
+        port (
+            i_clk         : in  std_logic;
+            i_byte_to_show : in  std_logic_vector(7 downto 0);
+            o_seg_anodes   : out std_logic_vector(1 downto 0);
+            o_seg_cathodes : out std_logic_vector(6 downto 0)
+        );
+    end component;
+    
+    -- *** NEW: UART TX COMPONENT DECLARATION ***
+    component uart_tx is
+        generic (
+            g_CLKS_PER_BIT : integer := 2083
+        );
+        port (
+            i_clk       : in  std_logic;
+            i_rst       : in  std_logic;
+            i_tx_data   : in  std_logic_vector(7 downto 0);
+            i_tx_start  : in  std_logic;
+            o_txd       : out std_logic;
+            o_tx_busy   : out std_logic
+        );
+    end component;
+
+begin
+
+    --==================================================================
+    -- INSTANTIATE SUB-MODULES
+    --==================================================================
+
+    -- Instantiate the UART Packet Parser
+    u_parser : packet_parser
+        generic map ( g_CLKS_PER_BIT => 2083 ) 
+        port map (
+            i_clk   => i_clk,
+            i_rst   => i_rst,
+            i_rxd   => i_rxd,
+            o_x_steps => w_x_steps_uart,
+            o_y_steps => w_y_steps_uart,
+            o_control => w_control_uart,
+            o_new_command_valid => w_new_command,
+            o_rx_activity_led => w_rx_activity_from_parser -- Connect to L2
+        );
+
+    -- Instantiate the 7-Segment Driver
+    u_display : display_multiplexer
+        port map (
+            i_clk          => i_clk,
+            i_byte_to_show => w_byte_to_show,
+            o_seg_anodes   => o_seg_anodes,
+            o_seg_cathodes => o_seg_cathodes
+        );
+        
+    -- *** NEW: INSTANTIATE UART TRANSMITTER ***
+    u_uart_tx : uart_tx
+        generic map (
+            g_CLKS_PER_BIT => 2083 -- Must match receiver
+        )
+        port map (
+            i_clk       => i_clk,
+            i_rst       => i_rst,
+            i_tx_data   => w_tx_data,
+            i_tx_start  => w_tx_start,
+            o_txd       => o_txd,
+            o_tx_busy   => w_tx_busy
+        );
+
+    --==================================================================
+    -- 7-SEGMENT DISPLAY LOGIC
+    --==================================================================
+    
+    p_display_control : process (i_clk)
+        variable v_btn_pulse : std_logic;
+    begin
+        if (rising_edge(i_clk)) then
+            -- Button edge detection
+            r_btn_sync(0) <= i_display_btn;
+            r_btn_sync(1) <= r_btn_sync(0);
+            
+            if (r_btn_sync(0) = '1' and r_btn_sync(1) = '0') then
+                v_btn_pulse := '1';
+            else
+                v_btn_pulse := '0';
+            end if;
+
+            if (i_rst = '1') then
+                r_display_index <= 0;
+                r_x_data_display <= (others => '0');
+                r_y_data_display <= (others => '0');
+                r_control_display <= (others => '0');
+                r_btn_sync <= (others => '0');
+            else
+                -- Latch new data when it arrives
+                if (w_new_command = '1') then
+                    r_x_data_display  <= w_x_steps_uart;
+                    r_y_data_display  <= w_y_steps_uart;
+                    r_control_display <= w_control_uart;
+                end if;
+                
+                -- Cycle display on button press
+                if (v_btn_pulse = '1') then
+                    if (r_display_index = 6) then
+                        r_display_index <= 0;
+                    else
+                        r_display_index <= r_display_index + 1;
+                    end if;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    p_byte_mux : process (r_display_index, r_x_data_display, r_y_data_display, r_control_display)
+    begin
+        case r_display_index is
+            when 0 => w_byte_to_show <= r_x_data_display(23 downto 16); -- X-High
+            when 1 => w_byte_to_show <= r_x_data_display(15 downto 8); -- X-Mid
+            when 2 => w_byte_to_show <= r_x_data_display(7 downto 0); -- X-Low
+            when 3 => w_byte_to_show <= r_y_data_display(23 downto 16); -- Y-High
+            when 4 => w_byte_to_show <= r_y_data_display(15 downto 8); -- Y-Mid
+            when 5 => w_byte_to_show <= r_y_data_display(7 downto 0); -- Y-Low
+            when 6 => w_byte_to_show <= r_control_display; -- Control
+            when others => w_byte_to_show <= x"EE"; -- Error
+        end case;
+    end process p_byte_mux;
+
+    --==================================================================
+    -- STEPPER MOTOR LOGIC
+    --==================================================================
+
+    -- Stepper Enable (from SW0)
+    o_stepper_enable <= i_stepper_driver_enable;
+
+    -- X-Axis Stepper FSM
+    p_stepper_x_fsm : process(i_clk, i_rst)
+    begin
+        if (i_rst = '1') then
+            r_x_stepper_state <= s_idle;
+            r_x_steps_remaining <= (others => '0');
+            o_stepper_x_dir <= '1'; -- Default to positive
+            r_stepper_x_counter <= 0;
+            w_stepper_x_pulse <= '0';
+            
+        elsif (rising_edge(i_clk)) then
+            
+            -- Default assignment
+            w_stepper_x_pulse <= '0';
+
+            -- 500 Hz Pulse Generator (runs when state is s_stepping)
+            if (r_x_stepper_state = s_stepping) then
+                if (r_stepper_x_counter = C_STEP_HALF_PERIOD) then
+                    r_stepper_x_counter <= 0;
+                    w_stepper_x_pulse <= '1'; -- Generate a 1-cycle pulse
+                else
+                    r_stepper_x_counter <= r_stepper_x_counter + 1;
+                end if;
+            else
+                r_stepper_x_counter <= 0; -- Hold counter at 0 when idle
+            end if;
+
+            -- FSM Logic
+            case r_x_stepper_state is
+                
+                when s_idle =>
+                    if (w_new_command = '1') then
+                        -- New command arrived, load it
+                        if (unsigned(w_x_steps_uart) > 0) then
+                            r_x_steps_remaining <= unsigned(w_x_steps_uart);
+                            o_stepper_x_dir <= w_control_uart(1); -- Bit 1 = X-Dir
+                            r_x_stepper_state <= s_stepping;
+                        end if;
+                    end if;
+                    
+                when s_stepping =>
+                    if (w_stepper_x_pulse = '1') then
+                        if (r_x_steps_remaining = 1) then
+                            r_x_steps_remaining <= (others => '0');
+                            r_x_stepper_state <= s_idle;
+                        else
+                            r_x_steps_remaining <= r_x_steps_remaining - 1;
+                        end if;
+                    end if;
+                    
+            end case;
+        end if;
+    end process;
+    
+    -- Y-Axis Stepper FSM (Identical to X-Axis)
+    p_stepper_y_fsm : process(i_clk, i_rst)
+    begin
+        if (i_rst = '1') then
+            r_y_stepper_state <= s_idle;
+            r_y_steps_remaining <= (others => '0');
+            o_stepper_y_dir <= '1'; -- Default to positive
+            r_stepper_y_counter <= 0;
+            w_stepper_y_pulse <= '0';
+            
+        elsif (rising_edge(i_clk)) then
+            
+            w_stepper_y_pulse <= '0';
+
+            if (r_y_stepper_state = s_stepping) then
+                if (r_stepper_y_counter = C_STEP_HALF_PERIOD) then
+                    r_stepper_y_counter <= 0;
+                    w_stepper_y_pulse <= '1'; 
+                else
+                    r_stepper_y_counter <= r_stepper_y_counter + 1;
+                end if;
+            else
+                r_stepper_y_counter <= 0;
+            end if;
+            
+            case r_y_stepper_state is
+                when s_idle =>
+                    if (w_new_command = '1') then
+                        if (unsigned(w_y_steps_uart) > 0) then
+                            r_y_steps_remaining <= unsigned(w_y_steps_uart);
+                            o_stepper_y_dir <= w_control_uart(2); -- Bit 2 = Y-Dir
+                            r_y_stepper_state <= s_stepping;
+                        end if;
+                    end if;
+                    
+                when s_stepping =>
+                    if (w_stepper_y_pulse = '1') then
+                        if (r_y_steps_remaining = 1) then
+                            r_y_steps_remaining <= (others => '0');
+                            r_y_stepper_state <= s_idle;
+                        else
+                            r_y_steps_remaining <= r_y_steps_remaining - 1;
+                        end if;
+                    end if;
+                    
+            end case;
+        end if;
+    end process;
+
+    -- Final Step Output (only if enabled)
+    o_stepper_x_step <= w_stepper_x_pulse and i_stepper_driver_enable;
+    o_stepper_y_step <= w_stepper_y_pulse and i_stepper_driver_enable;
+    
+    --==================================================================
+    -- SERVO MOTOR LOGIC
+    --==================================================================
+    
+    -- Connect UART control bit 0 to the servo position selector
+    w_servo_position_select <= w_control_uart(0);
+
+    -- Process 1: The 20 ms (50 Hz) Period Counter
+    p_servo_period_counter : process(i_clk, i_rst)
+    begin
+        if i_rst = '1' then
+            r_servo_period_counter <= 0;
+        elsif rising_edge(i_clk) then
+            if r_servo_period_counter = C_SERVO_PERIOD_CYCLES - 1 then
+                r_servo_period_counter <= 0;
+            else
+                r_servo_period_counter <= r_servo_period_counter + 1;
+            end if;
+        end if;
+    end process;
+
+    -- Process 2: Pulse Width Calculation (Combinational)
+    p_servo_pulse_width : process(w_servo_position_select)
+    begin
+        if w_servo_position_select = '0' then
+            -- Set target for 0 degrees (1.0 ms)
+            w_servo_target_width <= C_SERVO_MIN_PULSE_CYCLES;
+        else
+            -- Set target for 90 degrees (1.5 ms)
+            w_servo_target_width <= C_SERVO_90DEG_PULSE_CYCLES;
+        end if;
+    end process;
+
+    -- Process 3: Output Logic (Combinational)
+    p_servo_output : process(r_servo_period_counter, w_servo_target_width)
+    begin
+        if r_servo_period_counter < w_servo_target_width then
+            o_servo_pwm <= '1';
+        else
+            o_servo_pwm <= '0';
+        end if;
+    end process;
+
+    --==================================================================
+    -- *** NEW: TX STATUS LOGIC ***
+    --==================================================================
+    
+    -- Combinational logic to determine overall busy state
+    w_motor_busy <= '1' when (r_x_stepper_state = s_stepping) or (r_y_stepper_state = s_stepping) else '0';
+
+    -- FSM to send status byte ONLY when the motor state changes
+    p_tx_control : process(i_clk, i_rst)
+    begin
+        if (i_rst = '1') then
+            r_motor_busy_sync <= "00";
+            w_tx_data         <= x"00";
+            w_tx_start        <= '0';
+            r_tx_state        <= s_tx_idle;
+        elsif (rising_edge(i_clk)) then
+            -- 1. Default assignments
+            w_tx_start <= '0';
+
+            -- 2. Synchronize the motor busy signal to detect edges
+            r_motor_busy_sync(0) <= w_motor_busy;
+            r_motor_busy_sync(1) <= r_motor_busy_sync(0);
+            
+            -- 3. FSM
+            case r_tx_state is
+                when s_tx_idle =>
+                    -- Wait for a change in motor state, and make sure TX is not busy
+                    if (r_motor_busy_sync(0) /= r_motor_busy_sync(1)) and (w_tx_busy = '0') then
+                        -- State has changed!
+                        if (r_motor_busy_sync(0) = '1') then
+                            -- Just became busy, send '1'
+                            w_tx_data <= x"01";
+                        else
+                            -- Just became idle, send '0'
+                            w_tx_data <= x"00";
+                        end if;
+                        r_tx_state <= s_tx_trigger;
+                    end if;
+                
+                when s_tx_trigger =>
+                    -- Pulse the start signal for one clock cycle
+                    w_tx_start <= '1';
+                    r_tx_state <= s_tx_wait;
+                    
+                when s_tx_wait =>
+                    -- Wait for the transmitter to finish its job
+                    if (w_tx_busy = '0') then
+                        r_tx_state <= s_tx_idle;
+                    end if;
+            end case;
+        end if;
+    end process;
+
+
+    --==================================================================
+    -- DEBUG LED LOGIC
+    --==================================================================
+    
+    -- L0: Heartbeat LED (Active High)
+    p_heartbeat : process(i_clk)
+    begin
+        if (rising_edge(i_clk)) then
+            r_heartbeat_counter <= r_heartbeat_counter + 1;
+        end if;
+    end process;
+    o_heartbeat_led <= r_heartbeat_counter(23);
+
+    -- L2: RX Activity LED
+    o_rx_activity_led <= w_rx_activity_from_parser;
+
+    -- L3: Busy LED (Active High)
+    -- This is now the ONLY process driving r_busy_led
+    p_busy_led : process(i_clk, i_rst)
+    begin
+        if (i_rst = '1') then
+            r_busy_led <= '0';
+        elsif (rising_edge(i_clk)) then
+            -- Check for a new command while either stepper is busy
+            if (w_new_command = '1' and (r_x_stepper_state = s_stepping or r_y_stepper_state = s_stepping)) then
+                r_busy_led <= '1';
+            -- Clear the busy light once both are idle
+            elsif (r_x_stepper_state = s_idle and r_y_stepper_state = s_idle) then
+                r_busy_led <= '0';
+            end if;
+        end if;
+    end process;
+    o_busy_led <= r_busy_led;
+
+end architecture rtl;

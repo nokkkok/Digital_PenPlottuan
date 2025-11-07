@@ -1,0 +1,1 @@
+vhdtdtfi -lib work /home/ise/digital/rxUart/uart_rx.v -lang verilog -prj rxUart -o uart_rx.spl -module uart_rx -template /opt/Xilinx/14.7/ISE_DS/ISE//data/splveri.tft -deleteonerror 

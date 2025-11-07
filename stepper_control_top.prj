@@ -1,0 +1,5 @@
+vhdl work "uart_rx.vhd"
+vhdl work "hex_to_7seg.vhd"
+vhdl work "packet_parser.vhd"
+vhdl work "display_multiplexer.vhd"
+vhdl work "stepper_control_top.vhd"

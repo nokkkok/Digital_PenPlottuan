@@ -1,0 +1,248 @@
+//! **************************************************************************
+// Written by: Map P.20131013 on Thu Nov 06 23:40:01 2025
+//! **************************************************************************
+
+SCHEMATIC START;
+COMP "o_heartbeat_led" LOCATE = SITE "P82" LEVEL 1;
+COMP "i_x_endstop" LOCATE = SITE "P8" LEVEL 1;
+COMP "i_y_endstop" LOCATE = SITE "P6" LEVEL 1;
+COMP "o_rx_activity_led" LOCATE = SITE "P80" LEVEL 1;
+COMP "o_seg_cathodes<0>" LOCATE = SITE "P41" LEVEL 1;
+COMP "o_seg_cathodes<1>" LOCATE = SITE "P40" LEVEL 1;
+COMP "o_seg_cathodes<2>" LOCATE = SITE "P35" LEVEL 1;
+COMP "o_seg_cathodes<3>" LOCATE = SITE "P34" LEVEL 1;
+COMP "o_seg_cathodes<4>" LOCATE = SITE "P32" LEVEL 1;
+COMP "o_seg_cathodes<5>" LOCATE = SITE "P29" LEVEL 1;
+COMP "o_seg_cathodes<6>" LOCATE = SITE "P27" LEVEL 1;
+COMP "i_clk" LOCATE = SITE "P123" LEVEL 1;
+COMP "i_rxd" LOCATE = SITE "P23" LEVEL 1;
+COMP "i_rst" LOCATE = SITE "P45" LEVEL 1;
+PIN i_rst_pin<0> = BEL "i_rst" PINNAME PAD;
+PIN "i_rst_pin<0>" CLOCK_DEDICATED_ROUTE = FALSE;
+COMP "o_stepper_x_dir" LOCATE = SITE "P22" LEVEL 1;
+COMP "o_stepper_y_dir" LOCATE = SITE "P12" LEVEL 1;
+COMP "i_display_btn" LOCATE = SITE "P47" LEVEL 1;
+COMP "o_stepper_enable" LOCATE = SITE "P24" LEVEL 1;
+COMP "o_busy_led" LOCATE = SITE "P21" LEVEL 1;
+COMP "i_stepper_driver_enable" LOCATE = SITE "P66" LEVEL 1;
+COMP "o_stepper_x_step" LOCATE = SITE "P17" LEVEL 1;
+COMP "o_stepper_y_step" LOCATE = SITE "P10" LEVEL 1;
+COMP "o_seg_anodes<0>" LOCATE = SITE "P44" LEVEL 1;
+COMP "o_seg_anodes<1>" LOCATE = SITE "P43" LEVEL 1;
+COMP "o_servo_pwm" LOCATE = SITE "P15" LEVEL 1;
+TIMEGRP clk_grp = BEL "r_btn_sync_0" BEL "r_btn_sync_1" BEL
+        "w_stepper_x_pulse" BEL "w_stepper_y_pulse" BEL "r_x_data_display_0"
+        BEL "r_x_data_display_1" BEL "r_x_data_display_2" BEL
+        "r_x_data_display_3" BEL "r_x_data_display_4" BEL "r_x_data_display_5"
+        BEL "r_x_data_display_6" BEL "r_x_data_display_7" BEL
+        "r_x_data_display_8" BEL "r_x_data_display_9" BEL
+        "r_x_data_display_10" BEL "r_x_data_display_11" BEL
+        "r_x_data_display_12" BEL "r_x_data_display_13" BEL
+        "r_x_data_display_14" BEL "r_x_data_display_15" BEL
+        "r_x_data_display_16" BEL "r_x_data_display_17" BEL
+        "r_x_data_display_18" BEL "r_x_data_display_19" BEL
+        "r_x_data_display_20" BEL "r_x_data_display_21" BEL
+        "r_x_data_display_22" BEL "r_x_data_display_23" BEL
+        "r_y_data_display_0" BEL "r_y_data_display_1" BEL "r_y_data_display_2"
+        BEL "r_y_data_display_3" BEL "r_y_data_display_4" BEL
+        "r_y_data_display_5" BEL "r_y_data_display_6" BEL "r_y_data_display_7"
+        BEL "r_y_data_display_8" BEL "r_y_data_display_9" BEL
+        "r_y_data_display_10" BEL "r_y_data_display_11" BEL
+        "r_y_data_display_12" BEL "r_y_data_display_13" BEL
+        "r_y_data_display_14" BEL "r_y_data_display_15" BEL
+        "r_y_data_display_16" BEL "r_y_data_display_17" BEL
+        "r_y_data_display_18" BEL "r_y_data_display_19" BEL
+        "r_y_data_display_20" BEL "r_y_data_display_21" BEL
+        "r_y_data_display_22" BEL "r_y_data_display_23" BEL
+        "r_control_display_0" BEL "r_control_display_1" BEL
+        "r_control_display_2" BEL "r_control_display_3" BEL
+        "r_control_display_4" BEL "r_control_display_5" BEL
+        "r_control_display_6" BEL "r_control_display_7" BEL
+        "r_stepper_x_counter_0" BEL "r_stepper_x_counter_1" BEL
+        "r_stepper_x_counter_2" BEL "r_stepper_x_counter_3" BEL
+        "r_stepper_x_counter_4" BEL "r_stepper_x_counter_5" BEL
+        "r_stepper_x_counter_6" BEL "r_stepper_x_counter_7" BEL
+        "r_stepper_x_counter_8" BEL "r_stepper_x_counter_9" BEL
+        "r_stepper_x_counter_10" BEL "r_stepper_x_counter_11" BEL
+        "r_stepper_x_counter_12" BEL "r_stepper_x_counter_13" BEL
+        "r_stepper_x_counter_14" BEL "r_stepper_y_counter_0" BEL
+        "r_stepper_y_counter_1" BEL "r_stepper_y_counter_2" BEL
+        "r_stepper_y_counter_3" BEL "r_stepper_y_counter_4" BEL
+        "r_stepper_y_counter_5" BEL "r_stepper_y_counter_6" BEL
+        "r_stepper_y_counter_7" BEL "r_stepper_y_counter_8" BEL
+        "r_stepper_y_counter_9" BEL "r_stepper_y_counter_10" BEL
+        "r_stepper_y_counter_11" BEL "r_stepper_y_counter_12" BEL
+        "r_stepper_y_counter_13" BEL "r_stepper_y_counter_14" BEL
+        "r_x_steps_remaining_0" BEL "r_x_steps_remaining_1" BEL
+        "r_x_steps_remaining_2" BEL "r_x_steps_remaining_3" BEL
+        "r_x_steps_remaining_4" BEL "r_x_steps_remaining_5" BEL
+        "r_x_steps_remaining_6" BEL "r_x_steps_remaining_7" BEL
+        "r_x_steps_remaining_8" BEL "r_x_steps_remaining_9" BEL
+        "r_x_steps_remaining_10" BEL "r_x_steps_remaining_11" BEL
+        "r_x_steps_remaining_12" BEL "r_x_steps_remaining_13" BEL
+        "r_x_steps_remaining_14" BEL "r_x_steps_remaining_15" BEL
+        "r_x_steps_remaining_16" BEL "r_x_steps_remaining_17" BEL
+        "r_x_steps_remaining_18" BEL "r_x_steps_remaining_19" BEL
+        "r_x_steps_remaining_20" BEL "r_x_steps_remaining_21" BEL
+        "r_x_steps_remaining_22" BEL "r_x_steps_remaining_23" BEL
+        "r_y_steps_remaining_0" BEL "r_y_steps_remaining_1" BEL
+        "r_y_steps_remaining_2" BEL "r_y_steps_remaining_3" BEL
+        "r_y_steps_remaining_4" BEL "r_y_steps_remaining_5" BEL
+        "r_y_steps_remaining_6" BEL "r_y_steps_remaining_7" BEL
+        "r_y_steps_remaining_8" BEL "r_y_steps_remaining_9" BEL
+        "r_y_steps_remaining_10" BEL "r_y_steps_remaining_11" BEL
+        "r_y_steps_remaining_12" BEL "r_y_steps_remaining_13" BEL
+        "r_y_steps_remaining_14" BEL "r_y_steps_remaining_15" BEL
+        "r_y_steps_remaining_16" BEL "r_y_steps_remaining_17" BEL
+        "r_y_steps_remaining_18" BEL "r_y_steps_remaining_19" BEL
+        "r_y_steps_remaining_20" BEL "r_y_steps_remaining_21" BEL
+        "r_y_steps_remaining_22" BEL "r_y_steps_remaining_23" BEL
+        "r_display_index_0" BEL "r_display_index_1" BEL
+        "r_servo_period_counter_0" BEL "r_servo_period_counter_1" BEL
+        "r_servo_period_counter_2" BEL "r_servo_period_counter_3" BEL
+        "r_servo_period_counter_4" BEL "r_servo_period_counter_5" BEL
+        "r_servo_period_counter_6" BEL "r_servo_period_counter_7" BEL
+        "r_servo_period_counter_8" BEL "r_servo_period_counter_9" BEL
+        "r_servo_period_counter_10" BEL "r_servo_period_counter_11" BEL
+        "r_servo_period_counter_12" BEL "r_servo_period_counter_13" BEL
+        "r_servo_period_counter_14" BEL "r_servo_period_counter_15" BEL
+        "r_servo_period_counter_16" BEL "r_servo_period_counter_17" BEL
+        "r_servo_period_counter_18" BEL "r_heartbeat_counter_0" BEL
+        "r_heartbeat_counter_1" BEL "r_heartbeat_counter_2" BEL
+        "r_heartbeat_counter_3" BEL "r_heartbeat_counter_4" BEL
+        "r_heartbeat_counter_5" BEL "r_heartbeat_counter_6" BEL
+        "r_heartbeat_counter_7" BEL "r_heartbeat_counter_8" BEL
+        "r_heartbeat_counter_9" BEL "r_heartbeat_counter_10" BEL
+        "r_heartbeat_counter_11" BEL "r_heartbeat_counter_12" BEL
+        "r_heartbeat_counter_13" BEL "r_heartbeat_counter_14" BEL
+        "r_heartbeat_counter_15" BEL "r_heartbeat_counter_16" BEL
+        "r_heartbeat_counter_17" BEL "r_heartbeat_counter_18" BEL
+        "r_heartbeat_counter_19" BEL "r_heartbeat_counter_20" BEL
+        "r_heartbeat_counter_21" BEL "r_heartbeat_counter_22" BEL
+        "r_heartbeat_counter_23" BEL "r_x_stepper_state_FSM_FFd2" BEL
+        "r_x_stepper_state_FSM_FFd1" BEL "r_y_stepper_state_FSM_FFd2" BEL
+        "r_y_stepper_state_FSM_FFd1" BEL "r_display_index_2" BEL
+        "u_parser/r_fsm_state_FSM_FFd2" BEL "u_parser/r_fsm_state_FSM_FFd3"
+        BEL "u_parser/r_fsm_state_FSM_FFd1" BEL
+        "u_parser/r_fsm_state_FSM_FFd4" BEL "u_parser/r_y_steps_23" BEL
+        "u_parser/r_y_steps_22" BEL "u_parser/r_y_steps_21" BEL
+        "u_parser/r_y_steps_20" BEL "u_parser/r_y_steps_19" BEL
+        "u_parser/r_y_steps_18" BEL "u_parser/r_y_steps_17" BEL
+        "u_parser/r_y_steps_16" BEL "u_parser/r_y_steps_15" BEL
+        "u_parser/r_y_steps_14" BEL "u_parser/r_y_steps_13" BEL
+        "u_parser/r_y_steps_12" BEL "u_parser/r_y_steps_11" BEL
+        "u_parser/r_y_steps_10" BEL "u_parser/r_y_steps_9" BEL
+        "u_parser/r_y_steps_8" BEL "u_parser/r_y_steps_7" BEL
+        "u_parser/r_y_steps_6" BEL "u_parser/r_y_steps_5" BEL
+        "u_parser/r_y_steps_4" BEL "u_parser/r_y_steps_3" BEL
+        "u_parser/r_y_steps_2" BEL "u_parser/r_y_steps_1" BEL
+        "u_parser/r_y_steps_0" BEL "u_parser/r_x_steps_23" BEL
+        "u_parser/r_x_steps_22" BEL "u_parser/r_x_steps_21" BEL
+        "u_parser/r_x_steps_20" BEL "u_parser/r_x_steps_19" BEL
+        "u_parser/r_x_steps_18" BEL "u_parser/r_x_steps_17" BEL
+        "u_parser/r_x_steps_16" BEL "u_parser/r_x_steps_15" BEL
+        "u_parser/r_x_steps_14" BEL "u_parser/r_x_steps_13" BEL
+        "u_parser/r_x_steps_12" BEL "u_parser/r_x_steps_11" BEL
+        "u_parser/r_x_steps_10" BEL "u_parser/r_x_steps_9" BEL
+        "u_parser/r_x_steps_8" BEL "u_parser/r_x_steps_7" BEL
+        "u_parser/r_x_steps_6" BEL "u_parser/r_x_steps_5" BEL
+        "u_parser/r_x_steps_4" BEL "u_parser/r_x_steps_3" BEL
+        "u_parser/r_x_steps_2" BEL "u_parser/r_x_steps_1" BEL
+        "u_parser/r_x_steps_0" BEL "u_parser/r_temp_y_steps_23" BEL
+        "u_parser/r_temp_y_steps_22" BEL "u_parser/r_temp_y_steps_21" BEL
+        "u_parser/r_temp_y_steps_20" BEL "u_parser/r_temp_y_steps_19" BEL
+        "u_parser/r_temp_y_steps_18" BEL "u_parser/r_temp_y_steps_17" BEL
+        "u_parser/r_temp_y_steps_16" BEL "u_parser/r_temp_y_steps_15" BEL
+        "u_parser/r_temp_y_steps_14" BEL "u_parser/r_temp_y_steps_13" BEL
+        "u_parser/r_temp_y_steps_12" BEL "u_parser/r_temp_y_steps_11" BEL
+        "u_parser/r_temp_y_steps_10" BEL "u_parser/r_temp_y_steps_9" BEL
+        "u_parser/r_temp_y_steps_8" BEL "u_parser/r_temp_y_steps_7" BEL
+        "u_parser/r_temp_y_steps_6" BEL "u_parser/r_temp_y_steps_5" BEL
+        "u_parser/r_temp_y_steps_4" BEL "u_parser/r_temp_y_steps_3" BEL
+        "u_parser/r_temp_y_steps_2" BEL "u_parser/r_temp_y_steps_1" BEL
+        "u_parser/r_temp_y_steps_0" BEL "u_parser/r_temp_x_steps_23" BEL
+        "u_parser/r_temp_x_steps_22" BEL "u_parser/r_temp_x_steps_21" BEL
+        "u_parser/r_temp_x_steps_20" BEL "u_parser/r_temp_x_steps_19" BEL
+        "u_parser/r_temp_x_steps_18" BEL "u_parser/r_temp_x_steps_17" BEL
+        "u_parser/r_temp_x_steps_16" BEL "u_parser/r_temp_x_steps_15" BEL
+        "u_parser/r_temp_x_steps_14" BEL "u_parser/r_temp_x_steps_13" BEL
+        "u_parser/r_temp_x_steps_12" BEL "u_parser/r_temp_x_steps_11" BEL
+        "u_parser/r_temp_x_steps_10" BEL "u_parser/r_temp_x_steps_9" BEL
+        "u_parser/r_temp_x_steps_8" BEL "u_parser/r_temp_x_steps_7" BEL
+        "u_parser/r_temp_x_steps_6" BEL "u_parser/r_temp_x_steps_5" BEL
+        "u_parser/r_temp_x_steps_4" BEL "u_parser/r_temp_x_steps_3" BEL
+        "u_parser/r_temp_x_steps_2" BEL "u_parser/r_temp_x_steps_1" BEL
+        "u_parser/r_temp_x_steps_0" BEL "u_parser/r_control_7" BEL
+        "u_parser/r_control_6" BEL "u_parser/r_control_5" BEL
+        "u_parser/r_control_4" BEL "u_parser/r_control_3" BEL
+        "u_parser/r_control_2" BEL "u_parser/r_control_1" BEL
+        "u_parser/r_control_0" BEL "u_parser/r_temp_control_7" BEL
+        "u_parser/r_temp_control_6" BEL "u_parser/r_temp_control_5" BEL
+        "u_parser/r_temp_control_4" BEL "u_parser/r_temp_control_3" BEL
+        "u_parser/r_temp_control_2" BEL "u_parser/r_temp_control_1" BEL
+        "u_parser/r_temp_control_0" BEL "u_parser/u_uart_rx/r_bit_counter_2"
+        BEL "u_parser/u_uart_rx/r_bit_counter_1" BEL
+        "u_parser/u_uart_rx/r_bit_counter_0" BEL
+        "u_parser/u_uart_rx/r_fsm_state_FSM_FFd1" BEL
+        "u_parser/u_uart_rx/r_fsm_state_FSM_FFd2" BEL
+        "u_parser/u_uart_rx/r_fsm_state_FSM_FFd3" BEL
+        "u_parser/u_uart_rx/r_clk_counter_11" BEL
+        "u_parser/u_uart_rx/r_clk_counter_10" BEL
+        "u_parser/u_uart_rx/r_clk_counter_9" BEL
+        "u_parser/u_uart_rx/r_clk_counter_8" BEL
+        "u_parser/u_uart_rx/r_clk_counter_7" BEL
+        "u_parser/u_uart_rx/r_clk_counter_6" BEL
+        "u_parser/u_uart_rx/r_clk_counter_5" BEL
+        "u_parser/u_uart_rx/r_clk_counter_4" BEL
+        "u_parser/u_uart_rx/r_clk_counter_3" BEL
+        "u_parser/u_uart_rx/r_clk_counter_2" BEL
+        "u_parser/u_uart_rx/r_clk_counter_1" BEL
+        "u_parser/u_uart_rx/r_clk_counter_0" BEL
+        "u_parser/u_uart_rx/o_rx_data_7" BEL "u_parser/u_uart_rx/o_rx_data_6"
+        BEL "u_parser/u_uart_rx/o_rx_data_5" BEL
+        "u_parser/u_uart_rx/o_rx_data_4" BEL "u_parser/u_uart_rx/o_rx_data_3"
+        BEL "u_parser/u_uart_rx/o_rx_data_2" BEL
+        "u_parser/u_uart_rx/o_rx_data_1" BEL "u_parser/u_uart_rx/o_rx_data_0"
+        BEL "u_parser/u_uart_rx/r_rx_data_reg_7" BEL
+        "u_parser/u_uart_rx/r_rx_data_reg_6" BEL
+        "u_parser/u_uart_rx/r_rx_data_reg_5" BEL
+        "u_parser/u_uart_rx/r_rx_data_reg_4" BEL
+        "u_parser/u_uart_rx/r_rx_data_reg_3" BEL
+        "u_parser/u_uart_rx/r_rx_data_reg_2" BEL
+        "u_parser/u_uart_rx/r_rx_data_reg_1" BEL
+        "u_parser/u_uart_rx/r_rx_data_reg_0" BEL
+        "u_parser/u_uart_rx/o_rx_data_valid" BEL
+        "u_display/r_refresh_counter_13" BEL "u_display/r_refresh_counter_12"
+        BEL "u_display/r_refresh_counter_11" BEL
+        "u_display/r_refresh_counter_10" BEL "u_display/r_refresh_counter_9"
+        BEL "u_display/r_refresh_counter_8" BEL
+        "u_display/r_refresh_counter_7" BEL "u_display/r_refresh_counter_6"
+        BEL "u_display/r_refresh_counter_5" BEL
+        "u_display/r_refresh_counter_4" BEL "u_display/o_seg_anodes_1" BEL
+        "u_display/o_seg_anodes_0" BEL "u_display/r_nibble_3" BEL
+        "u_display/r_nibble_2" BEL "u_display/r_nibble_1" BEL
+        "u_display/r_nibble_0" BEL "u_parser/r_activity_counter_19" BEL
+        "u_parser/r_activity_counter_18" BEL "u_parser/r_activity_counter_17"
+        BEL "u_parser/r_activity_counter_16" BEL
+        "u_parser/r_activity_counter_15" BEL "u_parser/r_activity_counter_14"
+        BEL "u_parser/r_activity_counter_13" BEL
+        "u_parser/r_activity_counter_12" BEL "u_parser/r_activity_counter_11"
+        BEL "u_parser/r_activity_counter_10" BEL
+        "u_parser/r_activity_counter_9" BEL "u_parser/r_activity_counter_8"
+        BEL "u_parser/r_activity_counter_7" BEL
+        "u_parser/r_activity_counter_6" BEL "u_parser/r_activity_counter_5"
+        BEL "u_parser/r_activity_counter_4" BEL
+        "u_parser/r_activity_counter_3" BEL "u_parser/r_activity_counter_2"
+        BEL "u_parser/r_activity_counter_1" BEL
+        "u_parser/r_activity_counter_0" BEL "o_stepper_x_dir" BEL
+        "r_stepper_y_clk_out" BEL "r_stepper_x_clk_out" BEL "o_stepper_y_dir"
+        BEL "u_parser/r_new_cmd_valid" BEL "u_display/r_digit_select" BEL
+        "r_busy_led_C" BEL "r_busy_led_P" BEL "i_clk_BUFGP/BUFG" BEL
+        "Mshreg_r_y_endstop_sync_1" BEL "r_y_endstop_sync_1" BEL
+        "Mshreg_r_enable_sync_1" BEL "r_enable_sync_1" BEL
+        "Mshreg_r_x_endstop_sync_1" BEL "r_x_endstop_sync_1" BEL
+        "u_parser/u_uart_rx/Mshreg_r_rxd_sync_1" BEL
+        "u_parser/u_uart_rx/r_rxd_sync_1";
+TS_clk = PERIOD TIMEGRP "clk_grp" 50 ns HIGH 50%;
+SCHEMATIC END;
+

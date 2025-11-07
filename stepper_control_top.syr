@@ -1,0 +1,763 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.01 secs
+ 
+--> 
+Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.01 secs
+ 
+--> 
+Reading design: stepper_control_top.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "stepper_control_top.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "stepper_control_top"
+Output Format                      : NGC
+Target Device                      : xc6slx9-3-tqg144
+
+---- Source Options
+Top Module Name                    : stepper_control_top
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Parsing VHDL file "/home/ise/digital/rxUart/uart_rx.vhd" into library work
+Parsing entity <uart_rx>.
+Parsing architecture <rtl> of entity <uart_rx>.
+Parsing VHDL file "/home/ise/digital/rxUart/hex_to_7seg.vhd" into library work
+Parsing entity <hex_to_7seg>.
+Parsing architecture <rtl> of entity <hex_to_7seg>.
+Parsing VHDL file "/home/ise/digital/rxUart/packet_parser.vhd" into library work
+Parsing entity <packet_parser>.
+Parsing architecture <rtl> of entity <packet_parser>.
+Parsing VHDL file "/home/ise/digital/rxUart/display_multiplexer.vhd" into library work
+Parsing entity <display_multiplexer>.
+Parsing architecture <rtl> of entity <display_multiplexer>.
+Parsing VHDL file "/home/ise/digital/rxUart/stepper_control_top.vhd" into library work
+Parsing entity <stepper_control_top>.
+Parsing architecture <rtl> of entity <stepper_control_top>.
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <stepper_control_top> (architecture <rtl>) from library <work>.
+
+Elaborating entity <packet_parser> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <uart_rx> (architecture <rtl>) with generics from library <work>.
+INFO:HDLCompiler:679 - "/home/ise/digital/rxUart/uart_rx.vhd" Line 112. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/ise/digital/rxUart/packet_parser.vhd" Line 167. Case statement is complete. others clause is never selected
+
+Elaborating entity <display_multiplexer> (architecture <rtl>) from library <work>.
+
+Elaborating entity <hex_to_7seg> (architecture <rtl>) from library <work>.
+INFO:HDLCompiler:679 - "/home/ise/digital/rxUart/hex_to_7seg.vhd" Line 33. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "/home/ise/digital/rxUart/stepper_control_top.vhd" Line 248. Case statement is complete. others clause is never selected
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <stepper_control_top>.
+    Related source file is "/home/ise/digital/rxUart/stepper_control_top.vhd".
+    Found 1-bit register for signal <o_stepper_y_dir>.
+    Found 1-bit register for signal <r_busy_led>.
+    Found 1-bit register for signal <o_stepper_x_dir>.
+    Found 1-bit register for signal <w_stepper_x_pulse>.
+    Found 1-bit register for signal <r_stepper_x_clk_out>.
+    Found 1-bit register for signal <w_stepper_y_pulse>.
+    Found 1-bit register for signal <r_stepper_y_clk_out>.
+    Found 2-bit register for signal <r_x_stepper_state>.
+    Found 2-bit register for signal <r_y_stepper_state>.
+    Found 24-bit register for signal <r_x_steps_remaining>.
+    Found 24-bit register for signal <r_y_steps_remaining>.
+    Found 15-bit register for signal <r_stepper_x_counter>.
+    Found 15-bit register for signal <r_stepper_y_counter>.
+    Found 19-bit register for signal <r_servo_period_counter>.
+    Found 2-bit register for signal <r_y_endstop_sync>.
+    Found 2-bit register for signal <r_btn_sync>.
+    Found 2-bit register for signal <r_enable_sync>.
+    Found 3-bit register for signal <r_display_index>.
+    Found 24-bit register for signal <r_x_data_display>.
+    Found 24-bit register for signal <r_y_data_display>.
+    Found 8-bit register for signal <r_control_display>.
+    Found 24-bit register for signal <r_heartbeat_counter>.
+    Found 2-bit register for signal <r_x_endstop_sync>.
+    Found finite state machine <FSM_0> for signal <r_x_stepper_state>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 6                                              |
+    | Outputs            | 7                                              |
+    | Clock              | i_clk (rising_edge)                            |
+    | Reset              | i_rst (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | s_homing_y                                     |
+    | Power Up State     | s_homing_y                                     |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found finite state machine <FSM_1> for signal <r_y_stepper_state>.
+    -----------------------------------------------------------------------
+    | States             | 4                                              |
+    | Transitions        | 10                                             |
+    | Inputs             | 6                                              |
+    | Outputs            | 6                                              |
+    | Clock              | i_clk (rising_edge)                            |
+    | Reset              | i_rst (positive)                               |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | s_homing_y                                     |
+    | Power Up State     | s_homing_y                                     |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 3-bit adder for signal <r_display_index[2]_GND_4_o_add_8_OUT> created at line 231.
+    Found 15-bit adder for signal <r_stepper_x_counter[14]_GND_4_o_add_24_OUT> created at line 282.
+    Found 15-bit adder for signal <r_stepper_y_counter[14]_GND_4_o_add_50_OUT> created at line 356.
+    Found 19-bit adder for signal <r_servo_period_counter[18]_GND_4_o_add_73_OUT> created at line 426.
+    Found 24-bit adder for signal <r_heartbeat_counter[23]_GND_4_o_add_78_OUT> created at line 1241.
+    Found 24-bit subtractor for signal <GND_4_o_GND_4_o_sub_36_OUT<23:0>> created at line 1308.
+    Found 24-bit subtractor for signal <GND_4_o_GND_4_o_sub_62_OUT<23:0>> created at line 1308.
+    Found 8-bit 7-to-1 multiplexer for signal <w_byte_to_show> created at line 240.
+    Found 19-bit comparator greater for signal <o_servo_pwm> created at line 442
+    Summary:
+	inferred   7 Adder/Subtractor(s).
+	inferred 195 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred  16 Multiplexer(s).
+	inferred   2 Finite State Machine(s).
+Unit <stepper_control_top> synthesized.
+
+Synthesizing Unit <packet_parser>.
+    Related source file is "/home/ise/digital/rxUart/packet_parser.vhd".
+        g_CLKS_PER_BIT = 2083
+    Found 1-bit register for signal <r_new_cmd_valid>.
+    Found 24-bit register for signal <r_temp_x_steps>.
+    Found 24-bit register for signal <r_temp_y_steps>.
+    Found 8-bit register for signal <r_temp_control>.
+    Found 24-bit register for signal <r_x_steps>.
+    Found 24-bit register for signal <r_y_steps>.
+    Found 8-bit register for signal <r_control>.
+    Found 20-bit register for signal <r_activity_counter>.
+    Found 4-bit register for signal <r_fsm_state>.
+    Found finite state machine <FSM_2> for signal <r_fsm_state>.
+    -----------------------------------------------------------------------
+    | States             | 9                                              |
+    | Transitions        | 19                                             |
+    | Inputs             | 2                                              |
+    | Outputs            | 4                                              |
+    | Clock              | i_clk (rising_edge)                            |
+    | Reset              | i_rst (positive)                               |
+    | Reset type         | synchronous                                    |
+    | Reset State        | s_idle                                         |
+    | Power Up State     | s_idle                                         |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 20-bit subtractor for signal <GND_5_o_GND_5_o_sub_2_OUT<19:0>> created at line 1308.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred 133 D-type flip-flop(s).
+	inferred   5 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <packet_parser> synthesized.
+
+Synthesizing Unit <uart_rx>.
+    Related source file is "/home/ise/digital/rxUart/uart_rx.vhd".
+        g_CLKS_PER_BIT = 2083
+    Found 3-bit register for signal <r_fsm_state>.
+    Found 12-bit register for signal <r_clk_counter>.
+    Found 3-bit register for signal <r_bit_counter>.
+    Found 1-bit register for signal <o_rx_data_valid>.
+    Found 8-bit register for signal <r_rx_data_reg>.
+    Found 8-bit register for signal <o_rx_data>.
+    Found 2-bit register for signal <r_rxd_sync>.
+    Found finite state machine <FSM_3> for signal <r_fsm_state>.
+    -----------------------------------------------------------------------
+    | States             | 5                                              |
+    | Transitions        | 11                                             |
+    | Inputs             | 4                                              |
+    | Outputs            | 3                                              |
+    | Clock              | i_clk (rising_edge)                            |
+    | Reset              | i_rst (positive)                               |
+    | Reset type         | synchronous                                    |
+    | Reset State        | s_idle                                         |
+    | Power Up State     | s_idle                                         |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 3-bit adder for signal <r_bit_counter[2]_GND_6_o_add_13_OUT> created at line 92.
+    Found 12-bit adder for signal <r_clk_counter[11]_GND_6_o_add_22_OUT> created at line 103.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  34 D-type flip-flop(s).
+	inferred  14 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <uart_rx> synthesized.
+
+Synthesizing Unit <display_multiplexer>.
+    Related source file is "/home/ise/digital/rxUart/display_multiplexer.vhd".
+    Found 1-bit register for signal <r_digit_select>.
+    Found 4-bit register for signal <r_nibble>.
+    Found 2-bit register for signal <o_seg_anodes>.
+    Found 14-bit register for signal <r_refresh_counter>.
+    Found 14-bit adder for signal <r_refresh_counter[13]_GND_7_o_add_1_OUT> created at line 47.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  21 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+Unit <display_multiplexer> synthesized.
+
+Synthesizing Unit <hex_to_7seg>.
+    Related source file is "/home/ise/digital/rxUart/hex_to_7seg.vhd".
+    Found 16x7-bit Read Only RAM for signal <o_seg>
+    Summary:
+	inferred   1 RAM(s).
+Unit <hex_to_7seg> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 16x7-bit single-port Read Only RAM                    : 1
+# Adders/Subtractors                                   : 11
+ 12-bit adder                                          : 1
+ 14-bit adder                                          : 1
+ 15-bit adder                                          : 2
+ 19-bit adder                                          : 1
+ 20-bit subtractor                                     : 1
+ 24-bit adder                                          : 1
+ 24-bit subtractor                                     : 2
+ 3-bit adder                                           : 2
+# Registers                                            : 39
+ 1-bit register                                        : 10
+ 12-bit register                                       : 1
+ 14-bit register                                       : 1
+ 15-bit register                                       : 2
+ 19-bit register                                       : 1
+ 2-bit register                                        : 6
+ 20-bit register                                       : 1
+ 24-bit register                                       : 9
+ 3-bit register                                        : 2
+ 4-bit register                                        : 1
+ 8-bit register                                        : 5
+# Comparators                                          : 1
+ 19-bit comparator greater                             : 1
+# Multiplexers                                         : 36
+ 1-bit 2-to-1 multiplexer                              : 15
+ 12-bit 2-to-1 multiplexer                             : 5
+ 15-bit 2-to-1 multiplexer                             : 4
+ 19-bit 2-to-1 multiplexer                             : 1
+ 24-bit 2-to-1 multiplexer                             : 8
+ 3-bit 2-to-1 multiplexer                              : 1
+ 4-bit 2-to-1 multiplexer                              : 1
+ 8-bit 7-to-1 multiplexer                              : 1
+# FSMs                                                 : 4
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <display_multiplexer>.
+The following registers are absorbed into counter <r_refresh_counter>: 1 register on signal <r_refresh_counter>.
+Unit <display_multiplexer> synthesized (advanced).
+
+Synthesizing (advanced) Unit <hex_to_7seg>.
+INFO:Xst:3231 - The small RAM <Mram_o_seg> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 7-bit                     |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <i_hex>         |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <o_seg>         |          |
+    -----------------------------------------------------------------------
+Unit <hex_to_7seg> synthesized (advanced).
+
+Synthesizing (advanced) Unit <packet_parser>.
+The following registers are absorbed into counter <r_activity_counter>: 1 register on signal <r_activity_counter>.
+Unit <packet_parser> synthesized (advanced).
+
+Synthesizing (advanced) Unit <stepper_control_top>.
+The following registers are absorbed into counter <r_servo_period_counter>: 1 register on signal <r_servo_period_counter>.
+The following registers are absorbed into counter <r_heartbeat_counter>: 1 register on signal <r_heartbeat_counter>.
+The following registers are absorbed into counter <r_display_index>: 1 register on signal <r_display_index>.
+Unit <stepper_control_top> synthesized (advanced).
+
+Synthesizing (advanced) Unit <uart_rx>.
+The following registers are absorbed into counter <r_bit_counter>: 1 register on signal <r_bit_counter>.
+Unit <uart_rx> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 16x7-bit single-port distributed Read Only RAM        : 1
+# Adders/Subtractors                                   : 5
+ 12-bit adder                                          : 1
+ 15-bit adder                                          : 2
+ 24-bit subtractor                                     : 2
+# Counters                                             : 6
+ 14-bit up counter                                     : 1
+ 19-bit up counter                                     : 1
+ 20-bit down counter                                   : 1
+ 24-bit up counter                                     : 1
+ 3-bit up counter                                      : 2
+# Registers                                            : 300
+ Flip-Flops                                            : 300
+# Comparators                                          : 1
+ 19-bit comparator greater                             : 1
+# Multiplexers                                         : 32
+ 1-bit 2-to-1 multiplexer                              : 13
+ 12-bit 2-to-1 multiplexer                             : 5
+ 15-bit 2-to-1 multiplexer                             : 4
+ 24-bit 2-to-1 multiplexer                             : 8
+ 4-bit 2-to-1 multiplexer                              : 1
+ 8-bit 7-to-1 multiplexer                              : 1
+# FSMs                                                 : 4
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_0> on signal <r_x_stepper_state[1:2]> with user encoding.
+------------------------
+ State      | Encoding
+------------------------
+ s_homing_y | 00
+ s_homing_x | 01
+ s_idle     | 10
+ s_stepping | 11
+------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <FSM_1> on signal <r_y_stepper_state[1:2]> with user encoding.
+------------------------
+ State      | Encoding
+------------------------
+ s_homing_y | 00
+ s_homing_x | 01
+ s_idle     | 10
+ s_stepping | 11
+------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <u_parser/FSM_2> on signal <r_fsm_state[1:4]> with user encoding.
+---------------------------
+ State         | Encoding
+---------------------------
+ s_idle        | 0000
+ s_get_x_h     | 0001
+ s_get_x_m     | 0010
+ s_get_x_l     | 0011
+ s_get_y_h     | 0100
+ s_get_y_m     | 0101
+ s_get_y_l     | 0110
+ s_get_control | 0111
+ s_get_end     | 1000
+---------------------------
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <u_parser/u_uart_rx/FSM_3> on signal <r_fsm_state[1:3]> with user encoding.
+-------------------------
+ State       | Encoding
+-------------------------
+ s_idle      | 000
+ s_start_bit | 001
+ s_rx_data   | 010
+ s_stop_bit  | 011
+ s_cleanup   | 100
+-------------------------
+WARNING:Xst:3002 - This design contains one or more registers/latches that are directly
+   incompatible with the Spartan6 architecture. The two primary causes of this is
+   either a register or latch described with both an asynchronous set and
+   asynchronous reset, or a register or latch described with an asynchronous
+   set or reset which however has an initialization value of the opposite 
+   polarity (i.e. asynchronous reset with an initialization value of 1).
+    While this circuit can be built, it creates a sub-optimal implementation
+   in terms of area, power and performance. For a more optimal implementation
+   Xilinx highly recommends one of the following:
+
+          1) Remove either the set or reset from all registers and latches
+             if not needed for required functionality
+          2) Modify the code in order to produce a synchronous set
+             and/or reset (both is preferred)
+          3) Ensure all registers have the same initialization value as the
+             described asynchronous set or reset polarity
+          4) Use the -async_to_sync option to transform the asynchronous
+             set/reset to synchronous operation
+             (timing simulation highly recommended when using this option)
+
+  Please refer to http://www.xilinx.com search string "Spartan6 asynchronous set/reset" for more details.
+
+  List of register instances with asynchronous set or reset and opposite initialization value:
+    r_busy_led in unit <stepper_control_top>
+
+
+Optimizing unit <stepper_control_top> ...
+
+Optimizing unit <packet_parser> ...
+
+Optimizing unit <uart_rx> ...
+
+Optimizing unit <display_multiplexer> ...
+INFO:Xst:2261 - The FF/Latch <r_heartbeat_counter_0> in Unit <stepper_control_top> is equivalent to the following FF/Latch, which will be removed : <u_display/r_refresh_counter_0> 
+INFO:Xst:2261 - The FF/Latch <r_heartbeat_counter_1> in Unit <stepper_control_top> is equivalent to the following FF/Latch, which will be removed : <u_display/r_refresh_counter_1> 
+INFO:Xst:2261 - The FF/Latch <r_heartbeat_counter_2> in Unit <stepper_control_top> is equivalent to the following FF/Latch, which will be removed : <u_display/r_refresh_counter_2> 
+INFO:Xst:2261 - The FF/Latch <r_heartbeat_counter_3> in Unit <stepper_control_top> is equivalent to the following FF/Latch, which will be removed : <u_display/r_refresh_counter_3> 
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block stepper_control_top, actual ratio is 12.
+WARNING:Xst:1426 - The value init of the FF/Latch r_busy_led_LD hinder the constant cleaning in the block stepper_control_top.
+   You should achieve better results by setting this init to 1.
+
+Final Macro Processing ...
+
+Processing Unit <stepper_control_top> :
+	Found 2-bit shift register for signal <r_y_endstop_sync_1>.
+	Found 2-bit shift register for signal <r_enable_sync_1>.
+	Found 2-bit shift register for signal <r_x_endstop_sync_1>.
+	Found 2-bit shift register for signal <u_parser/u_uart_rx/r_rxd_sync_1>.
+Unit <stepper_control_top> processed.
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 383
+ Flip-Flops                                            : 383
+# Shift Registers                                      : 4
+ 2-bit shift register                                  : 4
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : stepper_control_top.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 887
+#      GND                         : 1
+#      INV                         : 76
+#      LUT1                        : 96
+#      LUT2                        : 13
+#      LUT3                        : 97
+#      LUT4                        : 159
+#      LUT5                        : 61
+#      LUT6                        : 60
+#      MUXCY                       : 158
+#      MUXF7                       : 2
+#      VCC                         : 1
+#      XORCY                       : 163
+# FlipFlops/Latches                : 388
+#      FD                          : 35
+#      FDC                         : 57
+#      FDCE                        : 48
+#      FDE                         : 20
+#      FDP                         : 3
+#      FDR                         : 38
+#      FDRE                        : 186
+#      LD                          : 1
+# Shift Registers                  : 4
+#      SRLC16E                     : 4
+# Clock Buffers                    : 2
+#      BUFG                        : 1
+#      BUFGP                       : 1
+# IO Buffers                       : 24
+#      IBUF                        : 6
+#      OBUF                        : 18
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx9tqg144-3 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:             388  out of  11440     3%  
+ Number of Slice LUTs:                  566  out of   5720     9%  
+    Number used as Logic:               562  out of   5720     9%  
+    Number used as Memory:                4  out of   1440     0%  
+       Number used as SRL:                4
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:    630
+   Number with an unused Flip Flop:     242  out of    630    38%  
+   Number with an unused LUT:            64  out of    630    10%  
+   Number of fully used LUT-FF pairs:   324  out of    630    51%  
+   Number of unique control sets:        18
+
+IO Utilization: 
+ Number of IOs:                          25
+ Number of bonded IOBs:                  25  out of    102    24%  
+
+Specific Feature Utilization:
+ Number of BUFG/BUFGCTRLs:                2  out of     16    12%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+i_clk                              | BUFGP                  | 391   |
+i_rst                              | IBUF+BUFG              | 1     |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -3
+
+   Minimum period: 5.094ns (Maximum Frequency: 196.302MHz)
+   Minimum input arrival time before clock: 4.957ns
+   Maximum output required time after clock: 6.621ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'i_clk'
+  Clock period: 5.094ns (frequency: 196.302MHz)
+  Total number of paths / destination ports: 8516 / 649
+-------------------------------------------------------------------------
+Delay:               5.094ns (Levels of Logic = 4)
+  Source:            u_parser/u_uart_rx/r_clk_counter_9 (FF)
+  Destination:       u_parser/u_uart_rx/r_clk_counter_11 (FF)
+  Source Clock:      i_clk rising
+  Destination Clock: i_clk rising
+
+  Data Path: u_parser/u_uart_rx/r_clk_counter_9 to u_parser/u_uart_rx/r_clk_counter_11
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             3   0.447   1.015  u_parser/u_uart_rx/r_clk_counter_9 (u_parser/u_uart_rx/r_clk_counter_9)
+     LUT6:I0->O            3   0.203   0.651  u_parser/u_uart_rx/GND_6_o_r_clk_counter[11]_equal_3_o<11>11 (u_parser/u_uart_rx/GND_6_o_r_clk_counter[11]_equal_3_o<11>1)
+     LUT6:I5->O           18   0.205   1.154  u_parser/u_uart_rx/GND_6_o_r_clk_counter[11]_equal_3_o<11> (u_parser/u_uart_rx/GND_6_o_r_clk_counter[11]_equal_3_o)
+     LUT5:I3->O           12   0.203   0.909  u_parser/u_uart_rx/_n0134_inv1_rstpot (u_parser/u_uart_rx/_n0134_inv1_rstpot)
+     LUT3:I2->O            1   0.205   0.000  u_parser/u_uart_rx/r_clk_counter_0_dpot (u_parser/u_uart_rx/r_clk_counter_0_dpot)
+     FDRE:D                    0.102          u_parser/u_uart_rx/r_clk_counter_0
+    ----------------------------------------
+    Total                      5.094ns (1.365ns logic, 3.729ns route)
+                                       (26.8% logic, 73.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'i_clk'
+  Total number of paths / destination ports: 344 / 344
+-------------------------------------------------------------------------
+Offset:              4.957ns (Levels of Logic = 3)
+  Source:            i_rst (PAD)
+  Destination:       u_parser/u_uart_rx/r_rx_data_reg_7 (FF)
+  Destination Clock: i_clk rising
+
+  Data Path: i_rst to u_parser/u_uart_rx/r_rx_data_reg_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O           323   1.222   2.321  i_rst_IBUF (i_rst_IBUF)
+     LUT4:I0->O            8   0.203   0.907  u_parser/u_uart_rx/_n0107_inv1_rstpot (u_parser/u_uart_rx/_n0107_inv1_rstpot)
+     LUT4:I2->O            1   0.203   0.000  u_parser/u_uart_rx/r_rx_data_reg_0_dpot1 (u_parser/u_uart_rx/r_rx_data_reg_0_dpot1)
+     FDE:D                     0.102          u_parser/u_uart_rx/r_rx_data_reg_0
+    ----------------------------------------
+    Total                      4.957ns (1.730ns logic, 3.227ns route)
+                                       (34.9% logic, 65.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'i_clk'
+  Total number of paths / destination ports: 82 / 18
+-------------------------------------------------------------------------
+Offset:              6.621ns (Levels of Logic = 4)
+  Source:            r_servo_period_counter_9 (FF)
+  Destination:       o_servo_pwm (PAD)
+  Source Clock:      i_clk rising
+
+  Data Path: r_servo_period_counter_9 to o_servo_pwm
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              4   0.447   1.048  r_servo_period_counter_9 (r_servo_period_counter_9)
+     LUT6:I0->O            1   0.203   0.684  o_servo_pwm11 (o_servo_pwm1)
+     LUT5:I3->O            1   0.203   0.684  o_servo_pwm13 (o_servo_pwm2)
+     LUT6:I4->O            1   0.203   0.579  o_servo_pwm3 (o_servo_pwm_OBUF)
+     OBUF:I->O                 2.571          o_servo_pwm_OBUF (o_servo_pwm)
+    ----------------------------------------
+    Total                      6.621ns (3.627ns logic, 2.994ns route)
+                                       (54.8% logic, 45.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'i_rst'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              4.661ns (Levels of Logic = 2)
+  Source:            r_busy_led_LD (LATCH)
+  Destination:       o_busy_led (PAD)
+  Source Clock:      i_rst falling
+
+  Data Path: r_busy_led_LD to o_busy_led
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q               1   0.498   0.808  r_busy_led_LD (r_busy_led_LD)
+     LUT3:I0->O            1   0.205   0.579  r_busy_led1 (r_busy_led)
+     OBUF:I->O                 2.571          o_busy_led_OBUF (o_busy_led)
+    ----------------------------------------
+    Total                      4.661ns (3.274ns logic, 1.387ns route)
+                                       (70.2% logic, 29.8% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock i_clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+i_clk          |    5.094|         |         |         |
+---------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 10.00 secs
+Total CPU time to Xst completion: 0.98 secs
+ 
+--> 
+
+
+Total memory usage is 488076 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    2 (   0 filtered)
+Number of infos    :    5 (   0 filtered)
+

@@ -1,0 +1,78 @@
+#==============================================================================
+# User Constraints File (UCF) for stepper_control_top
+# Target FPGA: Xilinx Spartan-6 XC6SLX9-2TQG144C
+# Target Board: Apex Instrument Surveyor-6
+#
+# This file matches the final "stepper_control_top.vhd"
+#==============================================================================
+
+#==============================================================================
+# System Clock (20 MHz Oscillator)
+#==============================================================================
+NET "i_clk" LOC = P123 | IOSTANDARD = LVCMOS33;
+NET "i_clk" TNM_NET = "clk_grp";
+TIMESPEC "TS_clk" = PERIOD "clk_grp" 50 ns HIGH 50%;
+
+#==============================================================================
+# System Reset (Push Button PB1)
+#==============================================================================
+NET "i_rst" LOC = P45 | IOSTANDARD = LVCMOS33 | PULLDOWN;
+ NET "i_rst" CLOCK_DEDICATED_ROUTE = FALSE;
+#==============================================================================
+# UART Input (K1 Connector)
+#==============================================================================
+NET "i_rxd" LOC = P23 | IOSTANDARD = LVCMOS33 | PULLUP;
+
+#==============================================================================
+# Inputs
+#==============================================================================
+# Display Button (Push Button PB3)
+NET "i_display_btn" LOC = P47 | IOSTANDARD = LVCMOS33 | PULLDOWN;
+
+# Stepper Driver Enable (Slide Switch SW0)
+NET "i_stepper_driver_enable" LOC = P66 | IOSTANDARD = LVCMOS33 | PULLDOWN;
+
+#==============================================================================
+# 7-Segment Display (Common Cathode)
+#==============================================================================
+# Anodes (Digit Select) - Mapped to right-most 2 digits (COMMON1, COMMON0)
+NET "o_seg_anodes<0>" LOC = P44 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # COMMON0
+NET "o_seg_anodes<1>" LOC = P43 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # COMMON1
+
+# Cathodes (Segment Select) - (g,f,e,d,c,b,a)
+NET "o_seg_cathodes<0>" LOC = P41 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # Seg 'a'
+NET "o_seg_cathodes<1>" LOC = P40 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # Seg 'b'
+NET "o_seg_cathodes<2>" LOC = P35 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # Seg 'c'
+NET "o_seg_cathodes<3>" LOC = P34 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # Seg 'd'
+NET "o_seg_cathodes<4>" LOC = P32 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # Seg 'e'
+NET "o_seg_cathodes<5>" LOC = P29 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # Seg 'f'
+NET "o_seg_cathodes<6>" LOC = P27 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8; # Seg 'g'
+
+#==============================================================================
+# Motor Outputs (K1 & K2 Connectors)
+#==============================================================================
+# Stepper Enable (K1)
+NET "o_stepper_enable" LOC = P24 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8;
+
+# Stepper 1 (X-Axis) (K1 & K2)
+NET "o_stepper_x_dir"  LOC = P22 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8;
+NET "o_stepper_x_step" LOC = P17 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8;
+
+# Stepper 2 (Y-Axis) (K2)
+NET "o_stepper_y_dir"  LOC = P12 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8;
+NET "o_stepper_y_step" LOC = P10 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8;
+
+# Servo (K2)
+NET "o_servo_pwm"      LOC = P15 | IOSTANDARD = LVCMOS33 | SLEW = FAST | DRIVE = 8;
+
+#==============================================================================
+# Debug LEDs (Active-High)
+#==============================================================================
+NET "o_heartbeat_led"   LOC = P82 | IOSTANDARD = LVCMOS33; # LED L0 (Heartbeat)
+NET "o_rx_activity_led" LOC = P80 | IOSTANDARD = LVCMOS33; # LED L2 (RX Activity)
+NET "o_busy_led"        LOC = P21 | IOSTANDARD = LVCMOS33; # LED L3 (Busy)
+#==============================================================================
+# Endstop Inputs (!!! YOU MUST CHANGE P50 AND P51 !!!)
+#==============================================================================
+NET "i_x_endstop" LOC = P8 | IOSTANDARD = LVCMOS33 | PULLDOWN;
+NET "i_y_endstop" LOC = P6 | IOSTANDARD = LVCMOS33 | PULLDOWN;

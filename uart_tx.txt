@@ -1,0 +1,114 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- This is a simple UART Transmitter module
+entity uart_tx is
+    generic (
+        g_CLKS_PER_BIT : integer := 2083 -- 20,000,000 / 9600
+    );
+    port (
+        -- System signals
+        i_clk       : in  std_logic;
+        i_rst       : in  std_logic;
+        
+        -- Data input
+        i_tx_data   : in  std_logic_vector(7 downto 0);
+        i_tx_start  : in  std_logic; -- Pulse to start
+        
+        -- Outputs
+        o_txd       : out std_logic := '1'; -- Default to idle (high)
+        o_tx_busy   : out std_logic := '0'  -- '1' when transmitting
+    );
+end entity uart_tx;
+
+architecture rtl of uart_tx is
+
+    type t_fsm_state is (
+        s_idle,
+        s_start_bit,
+        s_tx_data,
+        s_stop_bit
+    );
+    signal r_fsm_state   : t_fsm_state := s_idle;
+    
+    signal r_clk_counter : integer range 0 to g_CLKS_PER_BIT := 0;
+    signal r_bit_counter : integer range 0 to 7 := 0;
+    signal r_tx_data_reg : std_logic_vector(7 downto 0);
+    signal r_tx_busy     : std_logic := '0';
+
+begin
+
+    o_tx_busy <= r_tx_busy;
+
+    p_uart_tx : process (i_clk)
+    begin
+        if (rising_edge(i_clk)) then
+            if (i_rst = '1') then
+                r_fsm_state   <= s_idle;
+                r_clk_counter <= 0;
+                r_bit_counter <= 0;
+                r_tx_busy     <= '0';
+                o_txd         <= '1'; -- Idle
+                
+            else
+                case r_fsm_state is
+                
+                    -- IDLE: Wait for start pulse
+                    when s_idle =>
+                        o_txd <= '1';
+                        r_tx_busy <= '0';
+                        
+                        if (i_tx_start = '1') then
+                            r_fsm_state   <= s_start_bit;
+                            r_tx_data_reg <= i_tx_data; -- Latch data
+                            r_clk_counter <= 0;
+                            r_bit_counter <= 0;
+                            r_tx_busy     <= '1';
+                        end if;
+
+                    -- START_BIT: Send the '0' start bit
+                    when s_start_bit =>
+                        o_txd <= '0';
+                        if (r_clk_counter = (g_CLKS_PER_BIT - 1)) then
+                            r_clk_counter <= 0;
+                            r_fsm_state   <= s_tx_data;
+                        else
+                            r_clk_counter <= r_clk_counter + 1;
+                        end if;
+
+                    -- TX_DATA: Send all 8 data bits (LSB first)
+                    when s_tx_data =>
+                        o_txd <= r_tx_data_reg(r_bit_counter);
+                        
+                        if (r_clk_counter = (g_CLKS_PER_BIT - 1)) then
+                            r_clk_counter <= 0;
+                            if (r_bit_counter = 7) then
+                                r_fsm_state <= s_stop_bit;
+                            else
+                                r_bit_counter <= r_bit_counter + 1;
+                            end if;
+                        else
+                            r_clk_counter <= r_clk_counter + 1;
+                        end if;
+
+                    -- STOP_BIT: Send the '1' stop bit
+                    when s_stop_bit =>
+                        o_txd <= '1';
+                        if (r_clk_counter = (g_CLKS_PER_BIT - 1)) then
+                            r_clk_counter <= 0;
+                            r_fsm_state   <= s_idle;
+                            r_tx_busy     <= '0'; -- We are done
+                        else
+                            r_clk_counter <= r_clk_counter + 1;
+                        end if;
+
+                    when others =>
+                        r_fsm_state <= s_idle;
+                        
+                end case;
+            end if;
+        end if;
+    end process p_uart_tx;
+
+end architecture rtl;

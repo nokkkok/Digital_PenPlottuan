@@ -1,0 +1,2 @@
+work	"packet_parser.vhd"
+work	"uart_rx.vhd"
